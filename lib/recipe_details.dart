@@ -82,6 +82,33 @@ class _RecipeDetailsPageState extends State<RecipeDetailsPage> {
                   ),
 
                   SizedBox(height: 15),
+                  Text(
+                    ": المكونات",
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: "Cairo",
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                   Text(
+                    widget.ingredients,
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: "Cairo",
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                  Text(
+                    ": طريقة التحضير",
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: "Cairo",
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
 
                   Text(
                     widget.details,

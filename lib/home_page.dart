@@ -20,21 +20,20 @@ class _HomePageState extends State<HomePage> {
     List<Widget> pages = [
       homeContent(),
       favoritesContent(),
-      ProfilePage(username: widget.username,), // ← هنا تم ربط صفحة البروفايل
+      ProfilePage(username: widget.username), // ← هنا تم ربط صفحة البروفايل
     ];
 
     return Scaffold(
       appBar: AppBar(
-        title:Row(
-           mainAxisAlignment:MainAxisAlignment.end,
-           children: [
-            Text("وصفات الطبخ" ,
-            style: const TextStyle( fontWeight: FontWeight.bold),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              "وصفات الطبخ",
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-             
-           ]
-       
-        ) ,
+          ],
+        ),
         backgroundColor: Colors.orange,
       ),
 
@@ -58,129 +57,157 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  String filter = "all";
+
   Widget homeContent() {
-    List<Map<String, String>> recipes = [
+    List<Map<String, String>>
+    //filteredrecipes=recipes
+    recipes = [
       {
         "title": "كبسة دجاج",
         "ingredients": "أرز - دجاج - بهارات",
         "image": "images/kabsa.jpg",
         "details":
-            "١- نغسل الأرز.\n٢- نقلي البصل ونضيف الدجاج.\n٣- نضيف البهارات والمرق.\n٤- نتركه حتى ينضج.\n٥- يُقدم مع السلطة."
+            "١- نغسل الأرز.\n٢- نقلي البصل ونضيف الدجاج.\n٣- نضيف البهارات والمرق.\n٤- نتركه حتى ينضج.\n٥- يُقدم مع السلطة.",
+        "category": "غداء",
       },
       {
         "title": "باستا كريمي",
         "ingredients": "مكرونة - كريمة - جبن",
         "image": "images/pasta.jpg",
         "details":
-            "١- نسلق المكرونة.\n٢- نسوي صوص الكريمة والجبن.\n٣- نخلط المكرونة مع الصوص.\n٤- نتركها تتماسك قليلاً.\n٥- تُقدم ساخنة."
+            "١- نسلق المكرونة.\n٢- نسوي صوص الكريمة والجبن.\n٣- نخلط المكرونة مع الصوص.\n٤- نتركها تتماسك قليلاً.\n٥- تُقدم ساخنة.",
+        "category": "عشاء",
       },
       {
         "title": "بيتزا مارغريتا",
         "ingredients": "عجين - جبن - صلصة",
         "image": "images/pizza.jpg",
         "details":
-            "١- نجهز العجينة.\n٢- نضيف الصلصة والجبن.\n٣- ندخلها الفرن ١٢ دقيقة.\n٤- نزينها بالريحان.\n٥- تُقدم مباشرة."
+            "١- نجهز العجينة.\n٢- نضيف الصلصة والجبن.\n٣- ندخلها الفرن ١٢ دقيقة.\n٤- نزينها بالريحان.\n٥- تُقدم مباشرة.",
+        "category": "فطور",
       },
       {
         "title": "شوربة العدس",
         "ingredients": "عدس – جزر – بصل – ثوم – كمون",
         "image": "images/soap.jpg",
-        "details": "١- نغسل العدس.\n٢- نحمس البصل والجزر.\n٣- نضيف العدس والماء والبهارات.\n٤- نتركه حتى ينضج.\n٥- نخلطه بالخلاط ويقدم ساخناً."
+        "details":
+            "١- نغسل العدس.\n٢- نحمس البصل والجزر.\n٣- نضيف العدس والماء والبهارات.\n٤- نتركه حتى ينضج.\n٥- نخلطه بالخلاط ويقدم ساخناً.",
+        "category": "عشاء",
       },
       {
         "title": "مندي اللحم",
         "ingredients": "لحم – أرز – بهارات – فحم",
         "image": "images/mandy.jpg",
-        "details": "١- نتبل اللحم بالبهارات.\n٢- نطبخه حتى ينضج.\n٣- نطبخ الأرز بمرق اللحم.\n٤- نضيف الفحم لإعطاء نكهة.\n٥- يقدم مع الدقوس."
+        "details":
+            "١- نتبل اللحم بالبهارات.\n٢- نطبخه حتى ينضج.\n٣- نطبخ الأرز بمرق اللحم.\n٤- نضيف الفحم لإعطاء نكهة.\n٥- يقدم مع الدقوس.",
+        "category": "غداء",
       },
       {
         "title": "شكشوكة",
         "ingredients": "بيض – طماطم – بصل – فلفل",
         "image": "images/shakshoka.jpg",
-        "details": "١- نقلي البصل والفلفل.\n٢- نضيف الطماطم والبهارات حتى تتسبك.\n٣- نضيف البيض.\n٤- نتركه حتى يتماسك.\n٥- يقدم مع الخبز."
+        "details":
+            "١- نقلي البصل والفلفل.\n٢- نضيف الطماطم والبهارات حتى تتسبك.\n٣- نضيف البيض.\n٤- نتركه حتى يتماسك.\n٥- يقدم مع الخبز.",
+        "category": "عشاء",
       },
       {
         "title": "فطائر السبانخ",
         "ingredients": "عجين – سبانخ – بصل – سماق",
         "image": "images/sapankh.jpg",
-        "details": "١- نجهز الحشوة بالسبانخ والبصل.\n٢- نرق العجين.\n٣- نضيف الحشوة.\n٤- نغلق الفطائر.\n٥- نخبز حتى تتحمر."
+        "details":
+            "١- نجهز الحشوة بالسبانخ والبصل.\n٢- نرق العجين.\n٣- نضيف الحشوة.\n٤- نغلق الفطائر.\n٥- نخبز حتى تتحمر.",
+        "category": "فطور",
       },
       {
         "title": "مسقعة باذنجان",
         "ingredients": "باذنجان – لحم مفروم – طماطم – بشاميل",
         "image": "images/pathingan.jpg",
-        "details": "١- نقلي الباذنجان.\n٢- نطبخ اللحم مع الطماطم.\n٣- نرتب الطبقات.\n٤- نضيف البشاميل.\n٥- ندخلها الفرن حتى تتحمر."
+        "details":
+            "١- نقلي الباذنجان.\n٢- نطبخ اللحم مع الطماطم.\n٣- نرتب الطبقات.\n٤- نضيف البشاميل.\n٥- ندخلها الفرن حتى تتحمر.",
+        "category": "عشاء",
       },
       {
         "title": "كريم كراميل",
         "ingredients": "بيض – حليب – سكر – فانيليا",
         "image": "images/karamel.jpg",
-        "details": "١- نذيب السكر على النار.\n٢- نخلط البيض والحليب والفانيليا.\n٣- نضيف الكراميل.\n٤- نخبز بحمام مائي.\n٥- نتركه يبرد جيداً."
+        "details":
+            "١- نذيب السكر على النار.\n٢- نخلط البيض والحليب والفانيليا.\n٣- نضيف الكراميل.\n٤- نخبز بحمام مائي.\n٥- نتركه يبرد جيداً.",
+        "category": "حلا",
       },
       {
         "title": "سلطة سيزر",
         "ingredients": "خس – دجاج – صوص سيزر – جبن بارميزان",
         "image": "images/salata.jpg",
-        "details": "١- نجهز الدجاج المشوي.\n٢- نقطع الخس.\n٣- نضيف الصوص.\n٤- نخلط جيداً.\n٥- نرش الجبن."
+        "details":
+            "١- نجهز الدجاج المشوي.\n٢- نقطع الخس.\n٣- نضيف الصوص.\n٤- نخلط جيداً.\n٥- نرش الجبن.",
+        "category": "عشاء",
       },
       {
         "title": "برياني دجاج",
         "ingredients": "دجاج – أرز بسمتي – زعفران – بهارات برياني",
         "image": "images/pryany.jpg",
-        "details": "١- نتبل الدجاج.\n٢- نقلي البصل ونضيف البهارات.\n٣- نضيف الأرز ونصفّيه.\n٤- نرتب طبقات الأرز والدجاج.\n٥- نطهو على نار هادئة."
+        "details":
+            "١- نتبل الدجاج.\n٢- نقلي البصل ونضيف البهارات.\n٣- نضيف الأرز ونصفّيه.\n٤- نرتب طبقات الأرز والدجاج.\n٥- نطهو على نار هادئة.",
+        "category": "غداء",
       },
       {
         "title": "ورق عنب باللحم",
         "ingredients": "ورق عنب – لحم مفروم – أرز – بصل – بهارات",
         "image": "images/yalangi.jpg",
         "details":
-           "١- نخلط الأرز مع اللحم والبصل والبهارات.\n٢- نلف ورق العنب بإحكام.\n٣- نرتبه في القدر ونضيف مرق.\n٤- نطهو على نار هادئة ساعة.\n٥- يقدم مع الليمون.",
+            "١- نخلط الأرز مع اللحم والبصل والبهارات.\n٢- نلف ورق العنب بإحكام.\n٣- نرتبه في القدر ونضيف مرق.\n٤- نطهو على نار هادئة ساعة.\n٥- يقدم مع الليمون.",
+        "category": "غداء",
       },
       {
         "title": "مكرونة فرن",
         "ingredients": "مكرونة – صلصة – جبن – لحم مفروم",
         "image": "images/pashamile.jpg",
         "details":
-            "١- نسلق المكرونة.\n٢- نطبخ اللحم مع الصلصة.\n٣- نخلط المكرونة مع الصلصة.\n٤- نضيف الجبن.\n٥- نخبز ٢٠ دقيقة حتى تذوب."
+            "١- نسلق المكرونة.\n٢- نطبخ اللحم مع الصلصة.\n٣- نخلط المكرونة مع الصلصة.\n٤- نضيف الجبن.\n٥- نخبز ٢٠ دقيقة حتى تذوب.",
+        "category": "غداء",
       },
       {
         "title": "صينية الدجاج بالخضار",
         "ingredients": "دجاج – بطاطس – جزر – كريمة – بهارات",
         "image": "images/vegtable.jpg",
         "details":
-            "١- نقطع الدجاج والخضار.\n٢- نخلطهم مع البهارات.\n٣- نضيف كريمة الطبخ.\n٤- نغطي الصينية وندخلها الفرن.\n٥- نتركها تتحمر ثم تُقدّم."
+            "١- نقطع الدجاج والخضار.\n٢- نخلطهم مع البهارات.\n٣- نضيف كريمة الطبخ.\n٤- نغطي الصينية وندخلها الفرن.\n٥- نتركها تتحمر ثم تُقدّم.",
+        "category": "y]hx",
       },
       {
         "title": "كفتة بالطحينية",
         "ingredients": "لحم – بصل – طحينية – طماطم – بقدونس",
         "image": "images/kofta.jpg",
         "details":
-            "١- نشكل الكفتة.\n٢- نطبخها نصف استواء.\n٣- نخلط الطحينية مع الماء والليمون.\n٤- نضيفها فوق الكفتة.\n٥- نخبز نصف ساعة."
+            "١- نشكل الكفتة.\n٢- نطبخها نصف استواء.\n٣- نخلط الطحينية مع الماء والليمون.\n٤- نضيفها فوق الكفتة.\n٥- نخبز نصف ساعة.",
+        "category": "عشاء",
       },
       {
         "title": "فتة حمص",
         "ingredients": "حمص – خبز – لبن – طحينية – ثوم",
         "image": "images/fata.jpg",
         "details":
-            "١- نحمص الخبز.\n٢- نخلط اللبن مع الطحينية والثوم.\n٣- نرتب الطبقات: خبز – حمص – صوص.\n٤- نزين بالصنوبر.\n٥- تقدم مباشرة."
+            "١- نحمص الخبز.\n٢- نخلط اللبن مع الطحينية والثوم.\n٣- نرتب الطبقات: خبز – حمص – صوص.\n٤- نزين بالصنوبر.\n٥- تقدم مباشرة.",
+        "category": "عشاء",
       },
       {
         "title": "كريب شوكولاتة",
         "ingredients": "دقيق – حليب – بيض – شوكولاتة",
         "image": "images/crip.jpg",
         "details":
-            "١- نخلط المقادير.\n٢- نسخن المقلاة ونسكب الخليط.\n٣- نطهو كل جهة.\n٤- نضيف الشوكولاتة داخل الكريب.\n٥- نلفه ويقدم."
+            "١- نخلط المقادير.\n٢- نسخن المقلاة ونسكب الخليط.\n٣- نطهو كل جهة.\n٤- نضيف الشوكولاتة داخل الكريب.\n٥- نلفه ويقدم.",
+        "category": "حلا",
       },
       {
         "title": "تيراميسو",
         "ingredients": "بسكويت – قهوة – كريمة – كاكاو",
         "image": "images/teramiso.jpg",
         "details":
-            "١- نغمس البسكويت بالقهوة.\n٢- نخلط الكريمة.\n٣- نرتب طبقات: بسكويت – كريمة.\n٤- نكرر الطبقات.\n٥- نرش الكاكاو ونبرده ساعتين."
+            "١- نغمس البسكويت بالقهوة.\n٢- نخلط الكريمة.\n٣- نرتب طبقات: بسكويت – كريمة.\n٤- نكرر الطبقات.\n٥- نرش الكاكاو ونبرده ساعتين.",
+        "category": "حلا",
       },
-
-          
-          ];
+    ];
 
     return Padding(
       padding: const EdgeInsets.all(16),
@@ -197,10 +224,80 @@ class _HomePageState extends State<HomePage> {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
           ),
           const SizedBox(height: 10),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // Expanded(child:
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      filter = "فطور";
+                    });
+                  },
+                  child: Text("فطور", style: TextStyle(fontSize: 14)),
+                ),
+                //),
+                SizedBox(width: 8),
+                // Expanded(child:
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      filter = "غداء";
+                    });
+                  },
+                  child: Text("غداء", style: TextStyle(fontSize: 14)),
+                ),
+                // ),
+                SizedBox(width: 8),
+                // Expanded(child:
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      filter = "عشاء";
+                    });
+                  },
+                  child: Text("عشاء", style: TextStyle(fontSize: 14)),
+                ),
+                //  ),
+                SizedBox(width: 8),
+                // Expanded(child:
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      filter = "حلا";
+                    });
+                  },
+                  child: Text("حلا", style: TextStyle(fontSize: 14)),
+                ),
+                //  ),
+                SizedBox(width: 8),
+                // Expanded(child:
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      filter = "all";
+                    });
+                  },
+                  child: Text("الكل", style: TextStyle(fontSize: 14)),
+                ),
 
+                // ),
+                //  SizedBox(width: 8,),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
           Expanded(
             child: ListView(
-              children: recipes.map((recipe) => recipeCard(recipe)).toList(),
+              children: recipes
+                  .where(
+                    (recipe) => filter == "all" || recipe["category"] == filter,
+                  )
+                  .toList()
+                  .map((recipe) => recipeCard(recipe))
+                  .toList(),
             ),
           ),
         ],
@@ -211,10 +308,7 @@ class _HomePageState extends State<HomePage> {
   Widget favoritesContent() {
     if (favorites.isEmpty) {
       return const Center(
-        child: Text(
-          "لا توجد وصفات مفضلة بعد",
-          style: TextStyle(fontSize: 20),
-        ),
+        child: Text("لا توجد وصفات مفضلة بعد", style: TextStyle(fontSize: 20)),
       );
     }
 
@@ -241,11 +335,13 @@ class _HomePageState extends State<HomePage> {
             fit: BoxFit.cover,
           ),
         ),
-        title:
-            Text(recipe["title"], style: const TextStyle(fontWeight: FontWeight.bold)),
+        title: Text(
+          recipe["title"],
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         subtitle: Text(recipe["ingredients"]),
         trailing: Icon(Icons.arrow_forward_ios),
-    //عند الضغط يذهب الى تفاصيل الوصفة
+        //عند الضغط يذهب الى تفاصيل الوصفة
         onTap: () async {
           var result = await Navigator.push(
             context,
